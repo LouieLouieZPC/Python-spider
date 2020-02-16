@@ -1,13 +1,7 @@
 import requests
 
 
-kv={'key1':'value1','key2':'value2'}
+kv={'user-agent':'Chrome/10'}
 
-r=requests.request('GET','http://python123.io/ws',params=kv)   
-print(r.url)
-
-
-# Output:
-https://python123.io/ws?key1=value1&key2=value2
-
+r=requests.request('POST','http://python123.io/ws',headers=kv)   
 
