@@ -1,7 +1,7 @@
 import requests
 
-
-kv={'user-agent':'Chrome/10'}
-
-r=requests.request('POST','http://python123.io/ws',headers=kv)   
-
+r= requests.get('https://www.baidu.com')
+print(r.status_code)
+print(r.apparent_encoding)
+r.encoding=r.apparent_encoding
+print(r.text)
