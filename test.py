@@ -1,6 +1,9 @@
 import requests
 
-r=requests.post('http://httpbin.org/post',data='ABC')   # 向URL POST一个字符串，自动编码为data（数据）
+
+kv={'key1':'value1','key2':'value2'}
+
+r=requests.request('http://python123.io/ws',params=kv)   
 print(r.text)
 
 
