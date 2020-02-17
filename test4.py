@@ -19,13 +19,13 @@ deadCounts = []
 
 for i in data:
     provinceShortNames.append(i['provinceShortName'])
-    currentConfirmedCouns.append(i['currentConfirmedCount'])
+    currentConfirmedCounts.append(i['currentConfirmedCount'])
     confirmedCounts.append(i['confirmedCount'])
     curedCounts.append(i['curedCount'])
     deadCounts.append(i['deadCount'])
 df = pd.DataFrame()
 df['省份'] = provinceShortNames
-df['现存确诊']=currentConfirmedCouns
+df['现存确诊']=currentConfirmedCounts
 df['累计确诊'] = confirmedCounts
 df['死亡'] = deadCounts
 df['治愈'] = curedCounts
