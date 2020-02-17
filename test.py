@@ -1,9 +1,10 @@
 import requests
 
-url = 'http://httpbin.org/post'
+url = 'http://baidu.com'
 
-r = requests.request('POST', url)
+r = requests.request('GET', url)
 
 # 头部信息
-print(r.request.headers)
+print(r.cookies)
+print(type(r.cookies))
 # 观察User-Agent
