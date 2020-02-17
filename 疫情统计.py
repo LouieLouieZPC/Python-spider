@@ -12,7 +12,7 @@ data = eval(data)
 ### 解析数据，提取数据
 
 provinceShortNames = []
-currentConfirmedCounts=[]
+currentConfirmedCounts= []
 confirmedCounts = []
 curedCounts = []
 deadCounts = []
@@ -25,7 +25,7 @@ for i in data:
     deadCounts.append(i['deadCount'])
 df = pd.DataFrame()
 df['地区'] = provinceShortNames
-df['现存确诊']=currentConfirmedCounts
+df['现存确诊']= currentConfirmedCounts
 df['累计确诊'] = confirmedCounts
 df['死亡'] = deadCounts
 df['治愈'] = curedCounts
