@@ -1,3 +1,4 @@
+
 import pandas as pd
 import requests
 from fake_useragent import UserAgent
@@ -40,4 +41,13 @@ def main():
     url = 'https://ncov.dxy.cn/ncovh5/view/pneumonia'
     tb = parse_html(url)
     # 解析表格数据
-    df = p
+    df = pd.read_html(tb, encoding='utf-8', header=0)[0]
+    # 转换成列表嵌套字典的格式
+    result = list(df.T.to_dict().values())
+    # 保存为csv格式
+    df.to_csv(path_or_buf='D:\01.Software\GitHub\GitHub Repository\Python-spider\1.1Requests库学习\疫情.csv', index=False)
+    print(result)
+
+
+if __name__ == '__main__':
+    main()
