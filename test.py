@@ -1,10 +1,8 @@
 import requests
-
-url = 'http://baidu.com'
-
-r = requests.request('GET', url)
-
-# 头部信息
-print(r.cookies)
-print(type(r.cookies))
-# 观察User-Agent
+from requests.auth import HTTPBasicAuth
+r=requests.get('http://www.baidu.com',auth=HTTPBasicAuth('user','user'))
+print(r.status_code)
+r.encoding=r.apparent_encoding
+print(r.text)
+print(r.headers)
+print(r.request.headers)
