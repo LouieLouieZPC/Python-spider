@@ -1,5 +1,5 @@
 
-# 
+# 爬取页面例一：
 import requests
 url='https://item.jd.com/100003859236.html#none'
 
@@ -10,3 +10,4 @@ try:
     print(r.text)
 except:
     print('something error!!!')
+
