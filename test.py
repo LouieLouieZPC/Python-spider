@@ -1,8 +1,8 @@
 import requests
-from requests.auth import HTTPBasicAuth
-r=requests.get('http://www.baidu.com',auth=HTTPBasicAuth('user','user'))
-print(r.status_code)
-r.encoding=r.apparent_encoding
-print(r.text)
-print(r.headers)
-print(r.request.headers)
+from requests.exceptions import ReadTimeout
+
+try:
+    r=requests.get('HTTP://www.baidu.com',timeout=0.01)
+    print(r.headers)
+except ReadTimeout:
+    print('request is timeout!!!')
