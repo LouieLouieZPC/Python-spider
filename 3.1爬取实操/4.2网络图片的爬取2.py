@@ -9,7 +9,7 @@ ua=UserAgent()
 kv={'user-agent':ua.random}
 
 # 用图片原来的名字存储路径（在本地）
-root=r'D:\01.Software\GitHub\GitHub Repository\Python-spider\3.3案例'    # 定义根目录
+root=r'D:\01.Software\GitHub\GitHub Repository\Python-spider\3.2案例'    # 定义根目录
 path=root+url.split('/')[-1]     # 把文件保存路径标识为根目录+以反斜杠分割的最后一部分
 
 
@@ -27,5 +27,6 @@ def get_photo():
         print('The file already exists!')
     except:
         print('Crawl failed!')
+    return 'get_photo OK!'
 
 print(get_photo())   # 运行函数
