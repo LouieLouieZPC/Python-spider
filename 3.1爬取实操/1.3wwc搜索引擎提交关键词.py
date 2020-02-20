@@ -1,3 +1,5 @@
+# -*-coding:utf-8-*-
+
 import requests
 from fake_useragent import UserAgent
 ua=UserAgent()
@@ -12,7 +14,6 @@ try:
     print(r.status_code)
     print(r.request.url)
     print(r.request.headers)
-    print(r.text)
 
 except:
     print('Something Error!!!')
