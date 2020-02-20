@@ -3,7 +3,7 @@ import os
 from fake_useragent import UserAgent
 
 # 网址
-url='http://wx3.sinaimg.cn/mw600/00803BU6gy1gc36yakt6ej30hs0zktav.jpg'
+url='http://wx3.sinaimg.cn/mw600/00803BU6gy1gc36yakt6ej30hs0zktav.jpg'  # 图片地址
 # 伪装头部
 ua=UserAgent()
 kv={'user-agent':ua.random}
@@ -28,4 +28,4 @@ def get_photo():
     except:
         print('Crawl failed!')
 
-print(get_photo())
+print(get_photo())   # 运行函数
