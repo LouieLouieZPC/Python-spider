@@ -9,13 +9,14 @@ ua=UserAgent()
 kv={'user-agent':ua.random}
 
 # 用图片原来的名字存储路径（在本地）
-root=r'D:\01.Software\GitHub\GitHub Repository\Python-spider\3.2案例'
-path=root+url.split('/')[-1]
+root=r'D:\01.Software\GitHub\GitHub Repository\Python-spider\3.3案例'    # 定义根目录
+path=root+url.split('/')[-1]     # 把文件保存路径标识为根目录+以反斜杠分割的最后一部分
 
 
-try:
-    if not os.path.exists(root):
-        os.mkdir(root)
+def get_photo():
+    try:
+        if not os.path.exists(root):      # 判断根目录是否存在
+            os.mkdir(root)
         if not os.path.exists(path):
             r=requests.get(url,headers=kv)
             r.raise_for_status()
@@ -23,6 +24,8 @@ try:
                 f.write(r.content)
                 f.close()
                 print('File saved successfully!')
-    print('The file already exists!')
-except:
-    print('Crawl failed!')
+        print('The file already exists!')
+    except:
+        print('Crawl failed!')
+
+print(get_photo())
