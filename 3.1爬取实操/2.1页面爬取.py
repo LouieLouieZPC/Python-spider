@@ -1,9 +1,9 @@
 
 #  爬取页面例二：
 import requests
-from fake_useragent import UserAgent
-ua=UserAgent()     # 类创建实例对象
-kv={'user-agent':ua.random}       # 创建字典，制作请求头，.random属性
+from fake_useragent import UserAgent   # 导入fake_useragent模块中的UserAgent类
+ua=UserAgent()     # 创建类的实例对象
+kv={'user-agent':ua.random}       # 创建字典，制作请求头。 调用类的.random属性
 url='https://www.bilibili.com/video/av9784617?p=16'   # 请求网址
 
 
