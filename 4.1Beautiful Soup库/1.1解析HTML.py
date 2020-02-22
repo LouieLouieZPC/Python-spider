@@ -60,7 +60,7 @@ try:
     print('***************************************')
     demo=r.text       # 将r.text赋值给变量demo
     soup=BeautifulSoup(demo,'html.parser')     # 创建BeautifulSoup类的实例，输入两个变量：解析对象：HTML/XML document，解析器（这是Python自带的解析器parser）
-    print(soup.prettify())         # use BeautifulSoup class-->prettify function
+    print(soup.prettify())         #  soup是被解析成功的页面内容 ，use BeautifulSoup class-->prettify function
 except:
     print('Something Error')
 
