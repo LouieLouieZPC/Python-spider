@@ -44,10 +44,8 @@ print p_node.name,p_node['class'],p_node.get_text()
 
 
 
-
-
-import requests   # 
-from bs4 import BeautifulSoup
+import requests   # 导入requests库
+from bs4 import BeautifulSoup   # 导入bs4库中的Beautiful类
 from fake_useragent import UserAgent
 
 url='https://python123.io/ws/demo.html'
@@ -59,7 +57,49 @@ try:
     print(r.status_code)
     r.raise_for_status()
     print(r.text)     # 打印出页面的源代码(内容)
-    demo=r.text       # 将r.text赋值给变量
-    soup=BeautifulSoup(demo,'html.parser')     # 创建BeautifulSoup类的实例，输入两个变量：
+    print('***************************************')
+    demo=r.text       # 将r.text赋值给变量demo
+    soup=BeautifulSoup(demo,'html.parser')     # 创建BeautifulSoup类的实例，输入两个变量：解析对象：HTML/XML document，解析器（这是Python自带的解析器parser）
+    print(soup.prettify())         # use BeautifulSoup class-->prettify function
 except:
     print('Something Error')
+
+'''
+Output:
+
+200
+<html><head><title>This is a python demo page</title></head>
+<body>
+<p class="title"><b>The demo python introduces several python courses.</b></p>
+<p class="course">Python is a wonderful general-purpose programming language. You can learn Python from novice to professional by tracking the following courses:
+<a href="http://www.icourse163.org/course/BIT-268001" class="py1" id="link1">Basic Python</a> and <a href="http://www.icourse163.org/course/BIT-1001870001" class="py2" id="link2">Advanced 
+Python</a>.</p>
+</body></html>
+***************************************
+<html>
+ <head>
+  <title>
+   This is a python demo page
+  </title>
+ </head>
+ <body>
+  <p class="title">
+   <b>
+    The demo python introduces several python courses.
+   </b>
+  </p>
+  <p class="course">
+   Python is a wonderful general-purpose programming language. You can learn Python from novice to professional by tracking the following courses:
+   <a class="py1" href="http://www.icourse163.org/course/BIT-268001" id="link1">
+    Basic Python
+   </a>
+   and
+   <a class="py2" href="http://www.icourse163.org/course/BIT-1001870001" id="link2">
+    Advanced Python
+   </a>
+   .
+  </p>
+ </body>
+</html>
+
+'''
