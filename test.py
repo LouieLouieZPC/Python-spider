@@ -1,3 +1,6 @@
-import requests
-r = requests.get('https://www.12306.cn', cert=('/home/youdi/Download/**.crt', '/hone/youdi/.ssh/**.key'))
-print(r.status_code)
+from bs4 import BeautifulSoup
+newsoup=BeautifulSoup("<b><!--This is a comment--></b><p>This is not a comment</p>",'html.parser')
+print(newsoup.b.string)
+print(type(newsoup.b.string))
+print(newsoup.p.string)
+print(type(newsoup.p.string))
