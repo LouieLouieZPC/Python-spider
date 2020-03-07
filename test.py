@@ -4,7 +4,7 @@ from fake_useragent import UserAgent
 
 # 代理
 ua=UserAgent()
-kv={'user-agent',ua.random}    
+kv={'user-agent':ua.random}    
 
 def web_spider(url):
     '''
@@ -13,17 +13,20 @@ def web_spider(url):
     try:
         # get网页文档
         r=requests.get(url,headers=kv)
-        print(r.status_codes)
+        print(r.status_code)
         r.raise_for_status()
         r.encoding=r.apparent_encoding
         demo=r.text
-        
+
         # 解析
-
-
+        soup=BeautifulSoup(demo,'html.parser')
+        return(soup.prettify())
+        
     except:
-        print('Something Error!!!')
+        return('Something Error!!!')
 
-
+if __name__ == "__main__":
+    url='https://python123.io/ws/demo.html'
+    print(web_spider(url))
 
 
