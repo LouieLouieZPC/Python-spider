@@ -32,6 +32,6 @@ title1=getTitle(url)  # 将该网页的标题赋给title1
 if title1==None:      # 若等于None，则说明该标签不存在
     print('title could not be found!')
 else:
-    print(title1)
+    print('''This Web's heading is:\n''',title1)     # 成功得到网页的标题
 
     
