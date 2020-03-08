@@ -1,6 +1,7 @@
 #!/user/bin/python
 # -*-coding:utf-8-*-
-
+import re
+import bs4
 import requests
 from bs4 import BeautifulSoup
 from fake_useragent import UserAgent
@@ -23,6 +24,11 @@ def fillUnivList(ulist,html):
     '''
     try:
         soup=BeautifulSoup(html,'html.parser')
+        for tr in soup.find_all('tbody'):
+            if isinstance(tr,bs4.element.Tag):
+                tds=tr('td')                   # tr('td')即tr.fina_all('td')
+                ulist.append([tds[0].string,tds[1].string,tds[2].string,tds[3].string]
+
 
 
 def printUnivList(ulist,num):
