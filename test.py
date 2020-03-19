@@ -1,4 +1,6 @@
 import re
-print(re.sub(r'[1-9]\d{5}',':zipcode','BIT100081 TSU100084'))
-re.compile()
-BIT:zipcode TSU:zipcode
+i = re.search(r'py.*?n','pyanbncndnfngn')
+if i:
+	print(i.group(0))
+
+pyan  #使用最小匹配操作符?，实现最小匹配
