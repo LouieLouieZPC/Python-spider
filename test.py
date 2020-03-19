@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/user/bin/python
 # -*- coding: UTF-8 -*-
  
 import re
