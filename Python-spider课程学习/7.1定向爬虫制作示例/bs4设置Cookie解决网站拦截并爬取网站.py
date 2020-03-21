@@ -34,12 +34,12 @@ def getInfo(url,fname,fprice,fscore,users):
     for tag1 in soup.find_all(attrs={"class":"main"}):    
         print u'短租房地址:'
         for tag2 in tag1.find_all(attrs={"class":"desWord"}):
-            address = tag2.find('p').get_text()
+            address = tag2.find('p').get_text()   # .get_text()会将所有的超链接、段落、标签清除，只剩下一串不带标签的文字
             print address
     #可住人数     
         print u'可住人数:'
         for tag4 in tag1.find_all(attrs={"class":"w258"}):
-            yy = tag4.find('span').get_text()
+            yy = tag4.find('span').get_text()     # .get_text()会将所有的超链接、段落、标签清除，只剩下一串不带标签的文字
             print yy
         fname = fname.encode("utf-8")
         address = address.encode("utf-8")
