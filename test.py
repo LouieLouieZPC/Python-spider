@@ -1,64 +1,39 @@
-#!/user/bin/python
-# -*- coding: UTF-8 -*-
- 
-import re
- 
-from bs4 import BeautifulSoup
-html_doc = """
-<html><head><title>The Dormouse's story</title></head>
-<body>
-<p class="title"><b>The Dormouse's story</b></p>
-<p class="story">Once upon a time there were three little sisters; and their names were
-<a href="http://example.com/elsie" class="sister" id="link1">Elsie</a>,
-<a href="http://example.com/lacie" class="sister" id="link2">Lacie</a> and
-<a href="http://example.com/tillie" class="sister" id="link3">Tillie</a>;
-and they lived at the bottom of a well.</p>
-<p class="story">...</p>
-"""
-#创建一个BeautifulSoup解析对象
-soup = BeautifulSoup(html_doc,"html.parser",from_encoding="utf-8")
-#获取所有的链接
-links = soup.find_all('a')   # soup.find_all为获得所有
-print "所有的链接"
-for link in links:
-    print link.name,link['href'],link.get_text()    #  # .get_text()会将所有的超链接、段落、标签清除，只剩下一串不带标签的文字
- 
-print "获取特定的URL地址"
-link_node = soup.find('a',href="http://example.com/elsie")
-print link_node.name,link_node['href'],link_node['class'],link_node.get_text()   # .get_text()会将所有的超链接、段落、标签清除，只剩下一串不带标签的文字
- 
-print "正则表达式匹配"
-link_node = soup.find('a',href=re.compile(r"ti"))
-print link_node.name,link_node['href'],link_node['class'],link_node.get_text()    # .get_text()会将所有的超链接、段落、标签清除，只剩下一串不带标签的文字
- 
-print "获取P段落的文字"
-p_node = soup.find('p',class_='story')
-print p_node.name,p_node['class'],p_node.get_text()    # .get_text()会将所有的超链接、段落、标签清除，只剩下一串不带标签的文字
-```
-
-### (二)示例二：
-
-```python
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
 
-import requests   # 导入requests库
-from bs4 import BeautifulSoup   # 导入bs4库中的Beautiful类
-from fake_useragent import UserAgent
+import requests
+from bs4 import BeautifulSoup
+url="https://python123.io/ws/demo.html"
+r=requests.get(url)
+demo=r.text
 
-url='https://python123.io/ws/demo.html'
-ua=UserAgent()
-kv={'user-agent':ua.random}
 
-try:
-    r=requests.get(url,headers=kv)
-    print(r.status_code)
-    r.raise_for_status()
-    print(r.text)     # 打印出页面的源代码(内容)
-    print('***************************************')
-    demo=r.text       # 将r.text赋值给变量demo
-    soup=BeautifulSoup(demo,'html.parser')     # 创建BeautifulSoup类的实例，输入两个变量：解析对象：HTML/XML document，解析器（这是Python自带的解析器parser）
-    print(soup.prettify())         #  soup是被解析成功的页面内容 ，use BeautifulSoup class-->prettify function
-except:
-    print('Something Error')
-
+import re # 正则表达式库
+from bs4 import BeautifulSoup
+import  requests
+r = requests.get("http://python123.io/ws/demo.html")
+demo = r.text
+soup = BeautifulSoup(demo,"html.parser")
+# 查找demo里的a标签里的href的内容
+for link in soup.find_all('a'):
+    print(link.get('href'))
+# 输出所有a和b标签在列表中
+print(soup.find_all(['a','b']))
+# <tag>.find_all(True)，结果将是当前所有标签信息   
+for tag in soup.find_all(True):
+    print(tag.name)
+# 用正则表达式查找demo里以b开头的所有标签
+for tag in soup.find_all(re.compile('b')):
+    print(tag.name)
+# 查找demo里的p标签里的course的内容
+print(soup.find_all('p','course'))
+# 查找demo里的keyword（关键字参数）id属性中是否包含link1的标签,如果link1没有，将输出空
+print(soup.find_all(id='link1'))
+# 用正则表达式来输出link字符串(以link开头)
+print(soup.find_all(id=re.compile('link')))
+#　recursive是否对子孙全部检索，默认为True，改为False后只能查儿子节点
+print(soup.find_all('a',recursive=False))
+# 检索Basic Python字符串
+print(soup.find_all(string = 'Basic Python'))
+# 用正则表达式检索含有python的所有字符串
+print(soup.find_all(string = re.compile('python')))
