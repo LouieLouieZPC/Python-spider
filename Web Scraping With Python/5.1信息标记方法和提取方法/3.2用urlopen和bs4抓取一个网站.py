@@ -12,7 +12,9 @@ print(html.status)
 # 解析html
 soup=BeautifulSoup(html.read(),'html.parser')
 # 查找遍历
-namelist=soup.findAll('span',{'class':'green'})   # 找到所有符合条件的html文档内容给namelist
-print(namelist.p())
+namelist=soup.find_all('span',{'class':'green'})   # 找到所有符合条件的html文档内容给namelist
 for name in namelist:          # 遍历namelist
     print(name.get_text())     # .get_text()会将所有的超链接、段落、标签清除，只剩下一串不带标签的文字
+
+namelist1=soup.find_all(text='the prince')
+print(len(namelist1))
