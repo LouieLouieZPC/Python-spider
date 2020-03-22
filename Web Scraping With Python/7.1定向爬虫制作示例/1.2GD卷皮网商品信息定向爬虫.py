@@ -19,7 +19,7 @@ def getHtmlText(url):
         r.encoding=r.apparent_encoding
         return r.text                               # 获取内容
     except:
-        print('error!!!')                                   # 若有异常返回空值
+        return ''                                   # 若有异常返回空值
 
 def paserPage(ilt,html):
     try:
@@ -30,25 +30,25 @@ def paserPage(ilt,html):
             price=eval(plt[i].split('>')[2])
             ilt.append([title,price])          # 放入空列表ilt
     except:
-        print('error!!!!')
+        print('Error!!!!')
 
 
 def printGoodsList(ilt):
     # 做第一行的表头    
-    tplt='{:^4}\t{:^8}\t{:^16}'
+    tplt='{:^16}\t{:^16}\t{:^16}'
     print(tplt.format('序号','商品名称','价格'))
     
     # 做接下来的行
     count=0    # 做一个计数器，为序号准备
     for i in ilt:
         count+=1
-        print(tplt.format(count,ilt[0],ilt[1]))
+        print(tplt.format(count,i[0],i[1]))    # 注意，这里用迭代的i跟下标
 
 
 
 if __name__ == "__main__":
     goods='?keywords=书包'
-    depth=2
+    depth=2    # 这里爬取3页，即深度为2
     count_page=1
     start_url='http://www.juanpi.com/search/' + goods
     inforList=[]
@@ -56,16 +56,12 @@ if __name__ == "__main__":
         try:
             if count_page==1:
                 url=start_url
-            else:
                 count_page+=1
+            else:
                 url=start_url+ count_page + goods
-            count_page
-            html=getHtmlText(url)
-            paserPage(inforList,html)
-            print(inforList)
         except:  # 若某一页面解析有问题，则跳过
             continue
+        else:
+            html=getHtmlText(url)
+            paserPage(inforList,html)
     printGoodsList(inforList)
-
-
-
