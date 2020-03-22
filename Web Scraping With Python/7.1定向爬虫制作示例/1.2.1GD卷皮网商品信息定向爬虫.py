@@ -21,6 +21,7 @@ def getHtmlText(url):
     except:
         return ''                                   # 若有异常返回空值
 
+# 提取网页内容中信息到合适的数据结构,这里是列表
 def paserPage(ilt,html):
     try:
         tlt=re.findall(r'alt=".*?"',html)
