@@ -17,12 +17,12 @@ def getHtmlText(url):\
     request_cookies=requests.get
 
     try:
-        r=requests.get(url,timeout=30,headers=kv)
+        r=requests.get(url,timeout=30,headers=kv)   # 获取
         r.raise_for_status()
         r.encoding=r.apparent_encoding
-        return r.text
+        return r.text                               # 获取内容
     except:
-        return ''
+        return ''                                   # 若有异常返回空值
 
 def paserPage(ilt,html):
     try:
@@ -37,8 +37,15 @@ def paserPage(ilt,html):
 
 
 def printGoodsList(ilt):
-    tp
-
+    # 做第一行的表头    
+    tplt='{0:^4}\t{1:^8}\t{2:^16}'
+    print(tplt.format('序号','商品名称','价格'))
+    
+    # 做接下来的行
+    count=0    # 做一个计数器，为序号准备
+    for i in ilt:
+        count+=1
+        print(tplt.format(count,ilt[0],ilt[1]))
 
 if __name__ == "__main__":
     goods='书包'
