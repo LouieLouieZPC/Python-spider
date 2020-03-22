@@ -34,11 +34,14 @@ def fillUnivList(ulist,html):
 
 def printUnivList(ulist,num):
     '''
-    利用数据结构（列表）战展示并输出结果
+    利用数据结构（列表）展示并输出结果
     '''
+    # 打印表头
     e='{0:^10}\t{1:{3}^10}\t{2:^10}'   # {3}用于填充的单个字符:使用format function 第四个变量填充，即chr(12288),此法可对中英文输出进行优化
     print(e.format('排名','学校名称','总分',chr(12288)))  # 输出第一行：\t为横向制表符，^为居中对齐，10为每列的宽度
 
+
+    # 打印接下来的行
     for i in range(num):
         u=ulist[i]
         print(e.format(u[0],u[1],u[2],chr(12288)))

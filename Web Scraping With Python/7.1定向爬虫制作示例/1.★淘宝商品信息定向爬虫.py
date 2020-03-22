@@ -25,11 +25,19 @@ def getHtmlText(url):\
         return ''
 
 def paserPage(ilt,html):
-    print('')
+    try:
+        tlt=re.findall(r'\"raw_title\"\:\".*?\"',html)
+        plt=re.findall(r'\"view_price\"\:\"[\d\.]*\"',html)
+        for i in range(len(tlt)):
+            title=eval(tlt[i].split(':')[-1])  # eval函数可将获得的字符串最外层的引号去除；split函数选取分割符为冒号；[1]下标意为选最后一个部分
+            price=eval(plt[i].split(':')[-1])
+            ilt.append([title,price])          # 放入空列表ilt
+    except:
+        print('')
 
 
 def printGoodsList(ilt):
-    print('')
+    tp
 
 
 if __name__ == "__main__":
