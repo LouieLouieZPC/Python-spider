@@ -24,13 +24,13 @@ def getStockList(lst,stockURl):
     '''
     第一个参数为存储在的列表类型，第二个参数为获得股票url的网站
     '''
-    html=getHTMLText(stockURl，'GB2312')  # 获取网页内容
+    html=getHTMLText(stockURl，'GB2312')  # 获取网页内容，GB2312该网站使用的是GB2312
     soup=BeautifulSoup(html,'html.parser')  # 解析
     a=soup.findAll('a')  # 调用soup的findAll函数
     for i in a:
         try:
             href=i.attrs['href']  #获得属性href中的内容
-            lst.append(re.findall(r'[s][hz]\d{6}',href)[0])   # 调用re库的findall函数；[0]是为了取出返回的值添加，不然会将空值以空列表的形式添加进去
+            lst.append(re.findall(r'[s][hz]\d{6}',href)[0])   # 调用re库的findall函数，因为它返回的是列表（联想到soup.findAll()和soup.findAll(),前者输出列表则需[0]，而后者输出单个结果或None，则不需要[0]），所以需要用到[0]，这是为了取出返回的值添加，不然会将空值以空列表的形式添加进去。
         except:
             continue
 
@@ -48,7 +48,7 @@ def getStockInfo(lst,stockURl,fpath):
             infoDict={}    # 采用字典的数据结构放结果
             soup=BeautifulSoup(html,'html.parser')  # 解析
             stockInfo=soup.find('')
-
+            stock
 
 
 
