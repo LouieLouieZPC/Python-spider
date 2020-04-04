@@ -14,7 +14,7 @@ def getHTMLText(url,code='utf-8'):
     try:
         r=requests.get(url,timeout=30,headers=kv)
         r.raise_for_status()
-        r.encoding=code      # 直接赋，提高速度
+        r.encoding=code      # 直接赋，提高速度；若为r.encoding=r.apparent_encoding,则还要花时间分析文本内容
         return r.text
     except:
         return''
@@ -46,7 +46,7 @@ def getStockInfo(lst,stockURl,fpath):
             if html=='':   # 可能没有这个页面
                 continue
             infoDict={}    # 采用字典的数据结构放结果
-            soup=BeautifulSoup(html,'html.parser')
+            soup=BeautifulSoup(html,'html.parser')  # 解析
             stockInfo=soup.find('')
 
 
