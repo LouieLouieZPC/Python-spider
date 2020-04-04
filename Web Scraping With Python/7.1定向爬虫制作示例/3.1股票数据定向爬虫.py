@@ -1,8 +1,8 @@
-import requests
-from bs4 import BeautifulSoup
-import traceback
-import re
-from fake_useragent import UserAgent
+import requests   # 获取
+from bs4 import BeautifulSoup  # 解析
+import traceback  # 错误捕获
+import re  # 正则表达式
+from fake_useragent import UserAgent  # 代理
 
 
 # 获得url对应的页面内容
@@ -24,24 +24,24 @@ def getStockList(lst,stockURl):
     '''
     第一个参数为存储在的列表类型，第二个参数为获得股票url的网站
     '''
-    html=getHTMLText(stockURl，'GB2312')
-    soup=BeautifulSoup(html,'html.parser')
-    a=soup.findAll('a')
+    html=getHTMLText(stockURl，'GB2312')  # 获取网页内容
+    soup=BeautifulSoup(html,'html.parser')  # 解析
+    a=soup.findAll('a')  # 调用soup的findAll函数
     for i in a:
         try:
-            href=i.attrs['href']
-            lst.append(re.findall(r'[s][hz]\d{6}',href)[0])   # [0]是为了取出返回的值添加，不然会将空值以空列表的形式添加进去
+            href=i.attrs['href']  #获得属性href中的内容
+            lst.append(re.findall(r'[s][hz]\d{6}',href)[0])   # 调用re库的findall函数；[0]是为了取出返回的值添加，不然会将空值以空列表的形式添加进去
         except:
             continue
 
-
+# 获得股票信息
 def getStockInfo(lst,stockURl,fpath):
     '''
     三个参数：保存所有股票的信息列表，获得股票信息的url网站，把文件存到文件的文件路径
     '''
     for stock in lst:    # 遍历股票列表
-        url=stockURl+stock
-        html=getHTMLText(url)
+        url=stockURl+stock  # 修改获取股票信息的网址
+        html=getHTMLText(url)  # 获取网页内容
         try:
             if html=='':   # 可能没有这个页面
                 continue
