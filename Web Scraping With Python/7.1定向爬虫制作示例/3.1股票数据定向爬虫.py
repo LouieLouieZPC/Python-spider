@@ -40,15 +40,22 @@ def getStockInfo(lst,stockURl,fpath):
     三个参数：保存所有股票的信息列表，获得股票信息的url网站，把文件存到文件的文件路径
     '''
     for stock in lst:    # 遍历股票列表
-        url=stockURl+stock  # 修改获取股票信息的网址
+        url=stockURl+stock+'.html'  # 修改获取股票信息的网址
         html=getHTMLText(url)  # 获取网页内容
         try:
             if html=='':   # 可能没有这个页面
-                continue
+                continue   # 
             infoDict={}    # 采用字典的数据结构放结果
             soup=BeautifulSoup(html,'html.parser')  # 解析
-            stockInfo=soup.find('')
-            stock
+            stockInfo=soup.find('div',attrs={'class':'container-sm float-left stock__main'})
+            name=stockInfo.find_all(attrs={'class':'stock-name'})[0]  # 获得股票名称
+            infoDict.update({'股票名称':name.text})
+            keyList=stockInfo.find_all('td')
+            valueList=
+
+        except:
+            traceback.print_exc()
+            continue
 
 
 
