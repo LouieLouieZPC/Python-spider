@@ -24,7 +24,7 @@ def getStockList(lst,stockURl):
     '''
     第一个参数为存储在的列表类型，第二个参数为获得股票url的网站
     '''
-    html=getHTMLText(stockURl，'GB2312')  # 获取网页内容，GB2312该网站使用的是GB2312
+    html=getHTMLText(stockURl,'GB2312')  # 获取网页内容，GB2312该网站使用的是GB2312
     soup=BeautifulSoup(html,'html.parser')  # 解析
     a=soup.findAll('a')  # 调用soup的findAll函数
     for i in a:
