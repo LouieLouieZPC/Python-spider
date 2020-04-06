@@ -39,24 +39,33 @@ def getStockInfo(lst,stockURl,fpath):
     '''
     三个参数：保存所有股票的信息列表，获得股票信息的url网站，把文件存到文件的文件路径
     '''
+    count=0  # 用以计数
     for stock in lst:    # 遍历股票列表
         url=stockURl+stock+'.html'  # 修改获取股票信息的网址
         html=getHTMLText(url)  # 获取网页内容
         try:
             if html=='':   # 可能没有这个页面
-                continue   # 
+                continue   # 跳过
             infoDict={}    # 采用字典的数据结构放结果
             soup=BeautifulSoup(html,'html.parser')  # 解析
             stockInfo=soup.find('div',attrs={'class':'container-sm float-left stock__main'})
             name=stockInfo.find_all(attrs={'class':'stock-name'})[0]  # 获得股票名称
             infoDict.update({'股票名称':name.text})
             keyList=stockInfo.find_all('td')
-            valueList=
+            valueList=stockInfo.find_all('span')
+            for i in range(len(keyList)):
+                key=keyList[i].text
+                val=valueList[i].text
+                infoDict[key]=val
 
+            with open(fpath,'a',encoding='utf-8') as f:
+                f.write(str(infoDict)+'\n')
+                count+=1
+                print('\r当前速度：{:.2f}%').format(count*100/len(lst),end='')  # 由于print每次打印后都自动换行，若不想要换行，用\r将该功能禁掉，在该行重新打印
         except:
             traceback.print_exc()
+            print('\r当前速度：{:.2f}%').format(count*100/len(lst),end='')
             continue
-
 
 
 if __name__ == "__main__":
