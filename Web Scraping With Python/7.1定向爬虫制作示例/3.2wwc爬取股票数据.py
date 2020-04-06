@@ -5,6 +5,10 @@ from pyquery import PyQuery
 import pymysql
 from fake_useragent import UserAgent  # 代理
 
+'''
+https://www.cnblogs.com/babycomeon/p/12089531.html
+'''
+
 # 数据库连接
 def connect():
     conn = pymysql.connect(host='localhost',
