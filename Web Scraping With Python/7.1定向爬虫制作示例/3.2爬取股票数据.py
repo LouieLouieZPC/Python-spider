@@ -3,6 +3,7 @@ import re
 import json
 from pyquery import PyQuery
 import pymysql
+from fake_useragent import UserAgent  # 代理
 
 # 数据库连接
 def connect():
@@ -22,12 +23,12 @@ conn, cursor = connection['conn'], connection['cursor']
 
 sql_insert = "insert into stock(code, name, jinkai, chengjiaoliang, zhenfu, zuigao, chengjiaoe, huanshou, zuidi, zuoshou, liutongshizhi, create_date) values (%(code)s, %(name)s, %(jinkai)s, %(chengjiaoliang)s, %(zhenfu)s, %(zuigao)s, %(chengjiaoe)s, %(huanshou)s, %(zuidi)s, %(zuoshou)s, %(liutongshizhi)s, now())"
 
-headers = {
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36'
-}
+
 
 def get_stock_list(stockListURL):
-    r =requests.get(stockListURL, headers = headers)
+    ua=UserAgent()
+    kv={'user-agent':ua.random}
+    r =requests.get(stockListURL, headers = kv)
     doc = PyQuery(r.text)
     list = []
     # 获取所有 section 中 a 节点，并进行迭代
