@@ -3,7 +3,7 @@ import scrapy
 
 
 class DemoSpider(scrapy.Spider):
-    name = 'demo1'  # 名字
+    name = 'demo'  # 名字
     # allowed_domains = ['python123.io']      # 起启域名
     start_urls = ['http://python123.io/ws/demo.html']   # 要爬取的网址
 
