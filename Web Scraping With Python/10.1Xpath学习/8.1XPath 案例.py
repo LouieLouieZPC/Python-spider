@@ -12,18 +12,50 @@ from lxml import etree
 import requests
 from fake_useragent import UserAgent
 
-url='https://music.douban.com/top250'
 ua=UserAgent()
 kv={"user-agent":ua.random}
 
-def getInfo():
-    r=requests.get(url,headers=kv).text
-    s=etree.HTML(r)      # 创建实例
-    title=s.xpath('//*[@id="content"]/div/div[1]/div/table[1]/tr/td[2]/div/a')[0]
-    print(title.text)
+
+def getHtmltext(url):
+    '''
+    获取网页内容
+    '''
+    try:
+        r=requests.get(url,headers=kv)
+        r.raise_for_status()
+        r.encoding='utf-8'
+        return r.text
+    except:
+        print('Something error!!!')
+s
+def paserPage(ilt,html):
+    s=etree.HTML(html)      # 创建实例\
+    trs=s.xpath('/html/body/div[3]/div[1]/div/div[1]/div/table/tr')
+    for i in trs:
+        title=s.xpath('./td[2]/div/a')[0]  # 获取标题
+        href=s.xpath('//*[@id="content"]/div/div[1]/div/table[1]/tr/td[2]/div/a/@href')[0] # 获取链接地址
+        score=s.xpath('//*[@id="content"]/div/div[1]/div/table[1]/tr/td[2]/div/div/span[2]')[0] # 获取分数
+        print(title.text,href,score.text)
+
+
+def printGoodsList(ilt):
+
+
+
 
 if __name__ == "__main__":
-    getInfo()
+    depth=2  # 爬取深度为2，爬取3页
+    start_url="https://music.douban.com/top250?start="
+    inforList=[]
+    for i in range(depth):
+        try:
+            url=start_url+str(25*i)
+        except:
+            continue
+        else:
+            html=getHtmltext(url)
+            paserPage(inforList,html)
+    printGoodsList()
 
 
     
@@ -32,3 +64,9 @@ if __name__ == "__main__":
 
 
 
+
+
+
+//*[@id="content"]/div/div[1]/div/table[1]/tbody/tr/td[2]/div/p[1]
+
+div[@id='content']/div[@class='grid-16-8 clearfix']/div[@class='article']/div[@class='indent']/table[1]/tbody/tr[@class='item']/td[2]/div[@class='pl2']/p[@class='pl']
