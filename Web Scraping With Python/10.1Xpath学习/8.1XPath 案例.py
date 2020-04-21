@@ -27,21 +27,24 @@ def getHtmltext(url):
         return r.text
     except:
         print('Something error!!!')
-s
+
 def paserPage(ilt,html):
     s=etree.HTML(html)      # 创建实例\
     trs=s.xpath('/html/body/div[3]/div[1]/div/div[1]/div/table/tr')
-    for i in trs:
-        title=s.xpath('./td[2]/div/a')[0]  # 获取标题
-        href=s.xpath('//*[@id="content"]/div/div[1]/div/table[1]/tr/td[2]/div/a/@href')[0] # 获取链接地址
-        score=s.xpath('//*[@id="content"]/div/div[1]/div/table[1]/tr/td[2]/div/div/span[2]')[0] # 获取分数
-        print(title.text,href,score.text)
-
+    for tr in trs:
+        title=tr.xpath('./td[2]/div/a/text()')[0]  # 获取标题
+        score=tr.xpath('./td[2]//div/div/span[2]/text()')[0].strip() # 获取分数
+        numbers=tr.xpath('./td[2]/div/div/span[3]/text()')[0].strip().strip('()') # 获取评价人数
+        ilt.append([title,score,numbers])
 
 def printGoodsList(ilt):
+    tplt='{:^8}\t{:^8}\t{:^8}\t{:^8}'
+    print(tplt.format('排名','作品名称','评分','评价人数'))
 
-
-
+    count=0
+    for i in ilt:
+        count+=1
+        print(tplt.format(count,i[0],i[1],i[2]))
 
 if __name__ == "__main__":
     depth=2  # 爬取深度为2，爬取3页
@@ -55,18 +58,4 @@ if __name__ == "__main__":
         else:
             html=getHtmltext(url)
             paserPage(inforList,html)
-    printGoodsList()
-
-
-    
-
-
-
-
-
-
-
-
-//*[@id="content"]/div/div[1]/div/table[1]/tbody/tr/td[2]/div/p[1]
-
-div[@id='content']/div[@class='grid-16-8 clearfix']/div[@class='article']/div[@class='indent']/table[1]/tbody/tr[@class='item']/td[2]/div[@class='pl2']/p[@class='pl']
+    printGoodsList(inforList)
