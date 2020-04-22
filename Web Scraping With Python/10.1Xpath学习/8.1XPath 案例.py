@@ -29,6 +29,9 @@ def getHtmltext(url):
         print('Something error!!!')
 
 def paserPage(ilt,html):
+    '''
+    解析清洗页面、放入数据结构中
+    '''
     s=etree.HTML(html)      # 创建实例\
     trs=s.xpath('/html/body/div[3]/div[1]/div/div[1]/div/table/tr')
     for tr in trs:
@@ -38,6 +41,9 @@ def paserPage(ilt,html):
         ilt.append([title,score,numbers])
 
 def printGoodsList(ilt):
+    '''
+    输出列表
+    '''
     tplt='{:^8}\t{:^8}\t{:^8}\t{:^8}'
     print(tplt.format('排名','作品名称','评分','评价人数'))
 
@@ -47,7 +53,10 @@ def printGoodsList(ilt):
         print(tplt.format(count,i[0],i[1],i[2]))
 
 if __name__ == "__main__":
-    depth=2  # 爬取深度为2，爬取3页
+    '''
+    主程序
+    '''
+    depth=3  # 爬取深度为3，爬取3页
     start_url="https://music.douban.com/top250?start="
     inforList=[]
     for i in range(depth):
