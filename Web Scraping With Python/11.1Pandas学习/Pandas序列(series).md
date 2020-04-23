@@ -1,0 +1,284 @@
+# Pandas序列(series)
+
+
+
+**Pandas 序列**(**Series**)是pandas中的一维数据结构
+
+在 `Series` 中包含的数据类型可以是整数，浮点数，字符串，python对象等。
+
+一、**Pandas Series**构造函数	
+
+```python
+pandas.Series( data, index, dtype, copy)
+```
+
+参数说明：
+
+| 编号 |  参数   |                             说明                             |
+| :--: | :-----: | :----------------------------------------------------------: |
+|  1   | `data`  |     支持多种数据类型，如：`ndarray`，`list`，`constants`     |
+|  2   | `index` | 索引值必须是唯一的，与`data`的长度相同，默认为`np.arange(n)` |
+|  3   | `dtype` |                           数据类型                           |
+|  4   | `copy`  |                 是否复制数据，默认为`false`                  |
+
+
+## 一、创建一个空的Series
+```python
+import pandas as pd
+
+s=pd.Series()
+print(s)
+
+'''
+# output:
+Series([], dtype: float64)
+'''
+```
+
+## 二、从ndarray创建一个Series
+> NumPy Ndarray 对象，NumPy 最重要的一个特点是其 N 维数组对象 ndarray，该对象是一个快速而灵活的大数据集容器，描述相同数据类型的元素集合，以 0 下标为开始进行集合中元素的索引。
+
+如果数据是`ndarray`，则传递的索引必须具有相同的长度。 如果没有传递索引值，那么默认的索引范围将是`range(n)`，其中`n`是数组长度，即`[0,1,2,3…. range(len(array))-1] - 1]`。
+
+### (一)示例：不传递索引值
+```python
+import pandas as pd
+import numpy as np
+
+date=np.array(['a','b','c','d'])
+s=pd.Series(date)
+print(s)    # 输出的数据类型为对象
+
+'''
+这里没有传递索引，采用默认索引值是 0 到 len(data)-1，即 0 到 3
+# output
+0    a
+1    b
+2    c
+3    d
+dtype: object
+'''
+```
+
+
+### (二)示例：传递索引值
+```python
+import pandas as pd
+import numpy as np
+
+date=np.array(['a','b','c','d'])
+s=pd.Series(date,index=[100,101,102,103])   # 这里传递了索引值
+print(s)  # 输出的数据类型为对象
+
+'''
+# output
+100    a
+101    b
+102    c
+103    d
+dtype: object
+'''
+```
+
+
+## 三、从字典创建一个Series
+字典(`dict`)可以作为输入传递，如果没有指定索引，则按排序从字典中取得键值作为索引。 如果传递了索引，索引中与标签对应的数据中的值将被拉出。
+
+### (一)示例：字典键值作为索引(不传递索引)
+```python
+import pandas as pd
+import numpy as np
+
+date={'a':0.,'b':1.,'c':2.}
+s=pd.Series(date)   # 这里没传递索引值
+print(s)
+
+'''
+# output
+a    0.0
+b    1.0
+c    2.0
+dtype: float64
+'''
+```
+
+
+
+### (二)示例：字典键值作为索引(不传递索引)
+
+```python
+import pandas as pd
+import numpy as np
+
+date={'a':0.,'b':1.,'c':2.}
+s=pd.Series(date,index=['b','c','d','a'])   # 这里没传递索引值
+print(s)
+
+'''
+# output
+b    1.0
+c    2.0
+d    NaN  # 索引顺序保持不变，缺少的元素使用NaN(不是数字)填充。
+a    0.0
+dtype: float64
+'''
+```
+
+## 三、从标量创建一个Series
+如果数据是标量类型，则必须提供索引。重复该值以匹配索引的长度
+
+
+
+```python
+# import the pandas library and aliasing as pd
+import pandas as pd
+import numpy as np
+s = pd.Series(5, index=[0, 1, 2, 3])
+print (s)
+
+# output
+0    5
+1    5
+2    5
+3    5
+dtype: int64
+'''
+
+```
+
+## （一）通过**位置**访问Series数据
+
+Series中的数据可以使用**位置**，类似于访问[ndarray](https://geek-docs.com/numpy/numpy-tutorials/numpy-ndarray-object.html)中的数据来访问。
+
+> NumPy Ndarray 对象，NumPy 最重要的一个特点是其 N 维数组对象 ndarray，该对象是一个快速而灵活的大数据集容器，描述相同数据类型的元素集合，以 0 下标为开始进行集合中元素的索引。
+
+示例：
+
+s[0] 检索Series中的第一个元素
+
+s[:3] 检索Series中的前三个元素
+
+s[a :] : 将提取该索引之后的所有数据
+
+s[a : b] : 将提取 a 和 b 之间的所有数据
+
+### 1.示例：检索第一个元素，当前索引从0开始计数
+
+```python
+import pandas as pd
+s = pd.Series([1,2,3,4,5],index = ['a','b','c','d','e'])
+
+#retrieve the first element
+print (s[0])  # 以 0 下标为开始进行集合中元素的索引
+
+'''
+# output:
+1
+'''
+```
+
+### 2.示例：检索Series中的前三个元素
+
+```python
+import pandas as pd
+s = pd.Series([1,2,3,4,5],index = ['a','b','c','d','e'])
+
+#retrieve the first three element
+print (s[:3]) #左闭右开
+
+'''
+# output:
+a    1
+b    2
+c    3
+dtype: int64
+'''
+```
+
+### 3.示例：检索Series中的最后三个元素
+
+```python
+import pandas as pd
+s = pd.Series([1,2,3,4,5],index = ['a','b','c','d','e'])
+
+#retrieve the last three element
+print (s[-3:])
+
+'''
+# output:
+c    3
+d    4
+e    5
+dtype: int64
+'''
+```
+
+
+
+## （二）通过索引访问Series数据
+
+Series 就像一个固定大小的字典，可以通过**索引**获取数据。
+
+
+
+s['a'] 通过单个索引获取数据
+
+s[['a','c','d']] 通过多个索引获取数据（注意这里要俩括号）
+
+
+
+### 1.示例：使用索引获取单个元素。
+
+```python
+import pandas as pd
+s = pd.Series([1,2,3,4,5],index = ['a','b','c','d','e'])
+
+#retrieve a single element
+print (s['a'])
+
+'''
+1
+'''
+```
+
+
+
+### 2.示例：使用索引获取多个元素。
+
+
+
+
+
+```python
+import pandas as pd
+s = pd.Series([1,2,3,4,5],index = ['a','b','c','d','e'])
+
+#retrieve multiple elements
+print (s[['a','c','d']])  
+
+'''
+# output:
+a    1
+c    3
+d    4
+dtype: int64
+'''
+```
+
+
+### 3.示例：如果Series中并没有此索引，则会抛出异常。
+
+
+
+```python
+import pandas as pd
+s = pd.Series([1,2,3,4,5],index = ['a','b','c','d','e'])
+
+#retrieve multiple elements
+print (s['f'])
+
+'''
+# output:
+KeyError: 'f'
+'''
+```
