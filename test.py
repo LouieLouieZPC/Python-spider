@@ -1,5 +1,4 @@
 import pandas as pd
-s = pd.Series([1,2,3,4,5],index = ['a','b','c','d','e'])
-
-#retrieve multiple elements
-print (s['f'])
+d={'one':pd.Series([1,2,3],index=['a','b','c']),'two':pd.Series([1,2,3,4],index=['a','b','c','d'])}
+df=pd.DataFrame(d)
+print(df)
