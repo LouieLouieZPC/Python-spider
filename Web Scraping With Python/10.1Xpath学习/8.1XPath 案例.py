@@ -3,7 +3,7 @@
 [xpath中遇到[<Element a at 0x39a9a80>]](https://www.cnblogs.com/z-x-y/p/8260213.html)
 '''
 
-# !/user/bin/python
+#!/usr/bin/env python3
 # -*-coding:utf-8-*-
 
 
