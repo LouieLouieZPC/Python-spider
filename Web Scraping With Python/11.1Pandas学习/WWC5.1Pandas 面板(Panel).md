@@ -74,12 +74,58 @@ Minor_axis axis: 0 to 4
 ### (三)从 DataFrame 字典创建 Panel
 
 ```python
+#!/usr/bin/env python3
+#-*-coding:utf-8-*-
+
 #creating an empty panel
 import pandas as pd
 import numpy as np
 
-data = {'Item1' : pd.DataFrame(np.random.randn(4, 3)), 
-        'Item2' : pd.DataFrame(np.random.randn(4, 2))}
+data = {'Item1' : pd.DataFrame(np.random.randn(4, 3)), 'Item2' : pd.DataFrame(np.random.randn(4, 2))}
 p = pd.Panel(data)
 print (p)
+
+
+'''
+# output:
+<class 'pandas.core.panel.Panel'>
+Dimensions: 2 (items) x 4 (major_axis) x 3 (minor_axis)
+Items axis: Item1 to Item2
+Major_axis axis: 0 to 3
+Minor_axis axis: 0 to 2
+'''
+```
+
+## 三、从panel中读取数据
+
+要从 Panel 中读取数据，可以使用以下方式：  
+* Items  
+* Major_axis  
+* Minor_axis  
+
+
+### 二、使用Items
+
+```python
+#!/usr/bin/env python3
+#-*-coding:utf-8-*-
+
+#creating an empty panel
+import pandas as pd
+import numpy as np
+
+data = {'Item1' : pd.DataFrame(np.random.randn(4, 3)), 'Item2' : pd.DataFrame(np.random.randn(4, 2))}
+p = pd.Panel(data)
+print (p)
+
+'''
+# output:
+<class 'pandas.core.panel.Panel'>
+Dimensions: 2 (items) x 4 (major_axis) x 3 (minor_axis)
+Items axis: Item1 to Item2
+Major_axis axis: 0 to 3
+Minor_axis axis: 0 to 2
+
+'''
+
 ```
