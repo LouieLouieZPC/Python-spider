@@ -132,8 +132,55 @@ Minor_axis axis: 0 to 2
 
 
 ### (二)Major_axis  
+```python
 
+#!/usr/bin/env python3
+#-*-coding:utf-8-*-
+
+# creating an empty panel
+import pandas as pd
+import numpy as np
+data = {'Item1' : pd.DataFrame(np.random.randn(4, 3)), 
+        'Item2' : pd.DataFrame(np.random.randn(4, 2))}
+p = pd.Panel(data)
+print (p.major_xs(1))
+
+
+
+'''
+# output:
+      Item1     Item2
+0  1.152541  0.581985
+1  1.139998 -0.253684
+2  0.637131       NaN
+
+'''
+```
 
 
 
 ### (三)Minor_axis
+
+
+
+```python
+# creating an empty panel
+import pandas as pd
+import numpy as np
+data = {'Item1' : pd.DataFrame(np.random.randn(4, 3)), 
+        'Item2' : pd.DataFrame(np.random.randn(4, 2))}
+p = pd.Panel(data)
+print (p.minor_xs(1))
+
+'''
+# output:
+      Item1     Item2
+0 -0.854895  0.904276
+1 -0.492248 -0.386763
+2  0.487797 -1.398289
+3  1.224335 -0.300087
+
+'''
+```
+
+
