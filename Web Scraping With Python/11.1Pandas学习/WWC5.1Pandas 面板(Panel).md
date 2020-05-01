@@ -104,7 +104,7 @@ Minor_axis axis: 0 to 2
 * Minor_axis  
 
 
-### 二、使用Items
+### (一)使用Items
 
 ```python
 #!/usr/bin/env python3
@@ -129,3 +129,11 @@ Minor_axis axis: 0 to 2
 '''
 
 ```
+
+
+### (二)Major_axis  
+
+
+
+
+### (三)Minor_axis
