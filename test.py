@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 #-*-coding:utf-8-*-
-
+'''
+https://blog.csdn.net/c406495762/article/details/105946174
+'''
 import requests
 from bs4 import BeautifulSoup
 from fake_useragent import UserAgent
