@@ -45,9 +45,9 @@ for i, url in enumerate(tqdm(chapter_urls)):    # enumerate() 函数用于将一
     # 去掉.
     while '.' in name:
         name = name.replace('.', '')
-    chapter_save_dir = os.path.join(save_dir, name)   # 章节保存路径;https://blog.csdn.net/weixin_37895339/article/details/79185119
+    chapter_save_dir = os.path.join(save_dir, name)   # 章节保存路径; os.path.join()把两个路径合成一个,两者之间自动加入'/'
     if name not in os.listdir(save_dir):
-        os.mkdir(chapter_save_dir)
+        os.mkdir(chapter_save_dir)               # 在某个目录下创建一个新目录，首先把新目录的完整路径表示出来:
         r = requests.get(url = url)              # 获取
         html = BeautifulSoup(r.text, 'lxml')     # 解析
         script_info = html.script                # 选中script标签
@@ -64,13 +64,13 @@ for i, url in enumerate(tqdm(chapter_urls)):    # enumerate() 函数用于将一
             else:
                 url = 'https://images.dmzj.com/img/chapterpic/' + chapterpic_qian + '/' + chapterpic_hou + '/' + pic + '.jpg'
             pic_name = '%03d.jpg' % (idx + 1)   # %nd：n代表的是列宽长度；%0nd：0(数字零)代表的是不足n位长度的左补齐0;d代表的是整型
-            pic_save_path = os.path.join(chapter_save_dir, pic_name)
+            pic_save_path = os.path.join(chapter_save_dir, pic_name)   # 在某个目录下创建一个新目录/文件，首先把新目录的完整路径表示出来:
             with closing(requests.get(url, headers = download_header, stream = True)) as response:  
                 chunk_size = 1024  
                 content_size = int(response.headers['content-length'])  
-                if response.status_code == 200:
-                    with open(pic_save_path, "wb") as file:  
-                        for data in response.iter_content(chunk_size=chunk_size):  
+                if response.status_code == 200:   # 连接成功
+                    with open(pic_save_path, "wb") as file:    # 打开本地文件夹路径pic_save_path，以二进制写入，命名为file
+                        for data in response.iter_content(chunk_size=chunk_size):     # 当流下载时，用Response.iter_content或许更方便些。requests.get(url)默认是下载在内存中的，下载完成才存到硬盘上，可以用Response.iter_content　来边下载边存硬盘;chunk_size 可以自由调整为可以更好地适合您的用例的数字 ;https://www.cnblogs.com/chjbbs/p/8250588.html
                             file.write(data)  
                 else:
                     print('链接异常')
