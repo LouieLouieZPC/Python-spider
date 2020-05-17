@@ -30,7 +30,7 @@ def getStockList(lst,stockURl):
     for i in a:
         try:
             href=i.attrs['href']  #获得属性href中的内容
-            lst.append(re.findall(r'[s][hz]\d{6}',href)[0])   # 调用re库的findall函数，因为它返回的是列表（联想到soup.findAll()和soup.findAll(),前者输出列表则需[0]，而后者输出单个结果或None，则不需要[0]），所以需要用到[0]，这是为了取出返回的值添加，不然会将空值以空列表的形式添加进去。
+            lst.append(re.findall(r'[s][hz]\d{6}',href)[0])   # 调用re库的findall函数，因为它返回的是列表（联想到soup.findAll()和soup.find(),前者输出列表则需[0]，而后者输出单个结果或None，则不需要[0]），所以需要用到[0]，这是为了取出返回的值添加，不然会将空值以空列表的形式添加进去。
         except:
             continue
 
