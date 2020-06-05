@@ -8,6 +8,7 @@ from bs4 import BeautifulSoup
 from contextlib import closing
 from tqdm import tqdm    # Tqdm 是 Python 进度条库，可以在 Python 长循环中添加一个进度提示信息用法：tqdm(iterator)
 import time
+from fake_useragent import UserAgent
  
 """
     Author:
@@ -15,7 +16,10 @@ import time
     Wechat:
         https://mp.weixin.qq.com/s/OCWwRVDFNslIuKyiCVUoTA
 """
- 
+
+ua=UserAgent()
+kv={'user-agent':ua.random}
+
 # 创建保存目录
 save_dir = '妖神记'
 if save_dir not in os.listdir('./'):
@@ -24,7 +28,7 @@ if save_dir not in os.listdir('./'):
 target_url = "https://www.dmzj.com/info/yaoshenji.html"
  
 # 获取动漫章节链接和章节名
-r = requests.get(url = target_url)               # 获取
+r = requests.get(url = target_url,headers=kv)               # 获取
 bs = BeautifulSoup(r.text, 'lxml')               # 解析
 list_con_li = bs.find('ul', class_="list_con_li")
 cartoon_list = list_con_li.find_all('a')
