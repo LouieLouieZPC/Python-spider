@@ -9,7 +9,6 @@ from contextlib import closing
 from tqdm import tqdm    # Tqdm 是 Python 进度条库，可以在 Python 长循环中添加一个进度提示信息用法：tqdm(iterator)
 import time
 from fake_useragent import UserAgent
-
 """
     Author:
         Jack Cui
