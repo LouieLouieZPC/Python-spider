@@ -30,9 +30,9 @@ def getHtmltext(url):
 
 def paserPage(ilt,html):
     '''
-    解析清洗页面、放入数据结构中
+    解析清洗页面
     '''
-    s=etree.HTML(html)      # 创建实例\
+    s=etree.HTML(html)      # 创建实例
     trs=s.xpath('/html/body/div[3]/div[1]/div/div[1]/div/table/tr')
     for tr in trs:
         title=tr.xpath('./td[2]/div/a/text()')[0]  # 获取标题
